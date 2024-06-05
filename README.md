@@ -14,12 +14,15 @@ This repo is intended to provide additional tools and a pattern to customize the
 Use an [OpenShift Web Terminal](https://docs.openshift.com/container-platform/4.14/web_console/web_terminal/installing-web-terminal.html)
 
 ```sh
-YOLO_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/main/scripts/library/term.sh
-. <(curl -s "${YOLO_URL}")
-term_init
+# git clone
+https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced.git
+cd ocp-web-terminal-enhanced
 
 # make enhanced web terminal persistent
-oc apply -k https://github.com/redhat-na-ssa/demo-ai-gitops-catalog/components/operators/web-terminal/instance/overlays/enhanced
+oc apply -k bootstrap
+
+# delete old workspaces
+oc -n openshift-terminal delete devworkspace --all
 ```
 
 ## Build
