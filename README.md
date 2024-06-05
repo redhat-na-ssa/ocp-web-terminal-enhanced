@@ -1,5 +1,8 @@
 # OpenShift Enhanced Web Terminal
 
+[![Spelling](https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced/actions/workflows/spellcheck.yaml/badge.svg)](https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced/actions/workflows/spellcheck.yaml)
+[![Linting](https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced/actions/workflows/linting.yaml/badge.svg)](https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced/actions/workflows/linting.yaml)
+
 The OpenShift Web Terminal offers an extensible solution to those who want to run CLI tools in a browser based terminal.
 
 NOTE: In process of moving this work from another repo [here](https://github.com/redhat-na-ssa/demo-ai-gitops-catalog) `components/containers/web-terminal`
@@ -27,4 +30,4 @@ lint.sh
 
 - https://github.com/redhat-developer/web-terminal-operator
 - https://github.com/redhat-developer/web-terminal-tooling
-- https://github.com/redhat-na-ssa/demo-ai-gitops-catalog
+- https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced
