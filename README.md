@@ -29,6 +29,7 @@ lint.sh
 
 ## Links
 
-- https://github.com/redhat-developer/web-terminal-operator
-- https://github.com/redhat-developer/web-terminal-tooling
-- https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced
+- [Docs - Install OpenShift Web Terminal](https://docs.openshift.com/container-platform/4.12/web_console/web_terminal/installing-web-terminal.html)
+- [GIT - Web Terminal Operator](https://github.com/redhat-developer/web-terminal-operator)
+- [GIT - Web Terminal Tooling Container](https://github.com/redhat-developer/web-terminal-tooling)
+- [GIT - GitOps Catalog](https://github.com/redhat-na-ssa/demo-ai-gitops-catalog)
