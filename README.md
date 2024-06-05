@@ -1,6 +1,6 @@
 # OpenShift Enhanced Web Terminal
 
-The OpenShift Web Terminal offers an extensible solution to those who want to run CLI tools in a browswer based terminal.
+The OpenShift Web Terminal offers an extensible solution to those who want to run CLI tools in a browser based terminal.
 
 NOTE: In process of moving this work from another repo [here](https://github.com/redhat-na-ssa/demo-ai-gitops-catalog) `components/containers/web-terminal`
 
