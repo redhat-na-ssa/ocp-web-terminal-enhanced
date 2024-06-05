@@ -19,7 +19,7 @@ https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced.git
 cd ocp-web-terminal-enhanced
 
 # make enhanced web terminal persistent
-until oc apply -k bootstrap/web-terminal; do : ; done
+until oc apply -k bootstrap; do : ; done
 
 # delete old workspaces
 oc -n openshift-terminal delete devworkspace --all
