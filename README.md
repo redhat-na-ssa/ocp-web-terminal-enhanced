@@ -24,7 +24,7 @@ podman run -it --rm -v $(pwd):/data:z web-terminal-tooling:local /bin/bash
 Please run the following before submitting a PR / commit
 
 ```sh
-lint.sh
+./lint.sh
 ```
 
 ## Links
