@@ -19,4 +19,4 @@ podman run -it --rm -v $(pwd):/data:z web-terminal-tooling:local /bin/bash
 
 - https://github.com/redhat-developer/web-terminal-operator
 - https://github.com/redhat-developer/web-terminal-tooling
--  https://github.com/redhat-na-ssa/demo-ai-gitops-catalog
+- https://github.com/redhat-na-ssa/demo-ai-gitops-catalog
