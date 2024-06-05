@@ -1,6 +1,7 @@
 ai
 cd
 CLI
+devworkspace
 github
 githubusercontent
 gitops
@@ -10,10 +11,12 @@ init
 na
 oc
 ocp
+openshift
 OpenShift
 podman
 pwd
 redhat
 repo
 ssa
+workspaces
 YOLO
