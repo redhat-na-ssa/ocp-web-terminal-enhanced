@@ -5,9 +5,22 @@
 
 [![Build](https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced/actions/workflows/build-web-terminal.yaml/badge.svg)](https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced/actions/workflows/build-web-terminal.yaml)
 
-The [OpenShift Web Terminal](https://docs.openshift.com/container-platform/4.12/web_console/web_terminal/installing-web-terminal.html) offers an extensible solution to those who want to run CLI tools in a browser based terminal.
+The [OpenShift Web Terminal](https://docs.openshift.com/container-platform/4.14/web_console/web_terminal/installing-web-terminal.html) offers an extensible solution to those who want to run CLI tools in a browser based terminal.
 
 This repo is intended to provide additional tools and a pattern to customize the web terminal.
+
+## Quick Start
+
+Use an [OpenShift Web Terminal](https://docs.openshift.com/container-platform/4.14/web_console/web_terminal/installing-web-terminal.html)
+
+```sh
+YOLO_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/main/scripts/library/term.sh
+. <(curl -s "${YOLO_URL}")
+term_init
+
+# make enhanced web terminal persistent
+oc apply -k https://github.com/redhat-na-ssa/demo-ai-gitops-catalog/components/operators/web-terminal/instance/overlays/enhanced
+```
 
 ## Build
 
