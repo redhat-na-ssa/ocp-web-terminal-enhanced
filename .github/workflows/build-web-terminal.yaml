@@ -48,6 +48,7 @@ jobs:
       - name: Download tooling binaries
         if: steps.cache-tooling-binaries.outputs.cache-hit != 'true'
         run: |
+          cd container
           ./download_tools.sh
 
       - name: Log into GitHub Container Registry
