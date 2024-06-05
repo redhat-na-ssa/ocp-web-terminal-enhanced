@@ -5,9 +5,7 @@
 
 [![Build](https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced/actions/workflows/build-web-terminal.yaml/badge.svg)](https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced/actions/workflows/build-web-terminal.yaml)
 
-The OpenShift Web Terminal offers an extensible solution to those who want to run CLI tools in a browser based terminal.
-
-NOTE: In process of moving this work from another repo [here](https://github.com/redhat-na-ssa/demo-ai-gitops-catalog) `components/containers/web-terminal`
+The [OpenShift Web Terminal](https://docs.openshift.com/container-platform/4.12/web_console/web_terminal/installing-web-terminal.html) offers an extensible solution to those who want to run CLI tools in a browser based terminal.
 
 This repo is intended to provide additional tools and a pattern to customize the web terminal.
 
