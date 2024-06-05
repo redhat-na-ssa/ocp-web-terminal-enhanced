@@ -18,6 +18,9 @@ Use an [OpenShift Web Terminal](https://docs.openshift.com/container-platform/4.
 https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced.git
 cd ocp-web-terminal-enhanced
 
+# install web term operator
+oc apply -k https://github.com/redhat-na-ssa/demo-ai-gitops-catalog/components/operators/web-terminal/operator/overlays/fast
+
 # make enhanced web terminal persistent
 oc apply -k bootstrap
 
