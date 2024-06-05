@@ -73,4 +73,5 @@ CMD ["sleep", "infinity"]
 LABEL summary="Web Terminal - tooling container" \
       description="Web Terminal - tooling container" \
       io.k8s.display-name="Web Terminal - tooling container" \
-      io.openshift.expose-services=""
+      io.openshift.expose-services="" \
+      org.opencontainers.image.source = "https://github.com/redhat-na-ssa/demo-ai-gitops-catalog"
