@@ -13,6 +13,7 @@ This repo is intended to provide additional tools and a pattern to customize the
 ## Build
 
 ```sh
+cd container
 ./download_tools.sh
 
 podman build -t web-terminal-tooling:local .
