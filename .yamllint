@@ -1,0 +1,19 @@
+extends: default
+
+rules:
+  document-start: disable
+  line-length: disable
+  comments-indentation: disable
+  new-line-at-end-of-file: disable
+  indentation:
+    indent-sequences: whatever
+    ignore: kludgeops/
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+  truthy:
+    ignore: .github/workflows/
+
+ignore:
+  - "scratch/*"
+  - "src/*"

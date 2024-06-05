@@ -1,0 +1,6 @@
+scratch
+venv
+.venv
+dictionary.dic
+*.tgz
+*.zip

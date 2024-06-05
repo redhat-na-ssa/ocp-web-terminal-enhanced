@@ -1,0 +1,44 @@
+name: Linting
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - "main"
+    paths-ignore:
+      - README.md
+      - docs/*.md
+  pull_request:
+    branches:
+      - "main"
+    paths-ignore:
+      - README.md
+      - docs/*.md
+
+jobs:
+  lint-yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+      - name: Validate YAML
+        uses: ibiqlik/action-yamllint@v3
+
+  lint-bash:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+      - name: Run shellcheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          version: v0.8.0
+          severity: warning
+
+  lint-container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+      - name: Run hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Containerfile
