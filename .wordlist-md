@@ -2,10 +2,13 @@ ai
 cd
 CLI
 github
+githubusercontent
 gitops
 GitOps
 https
+init
 na
+oc
 ocp
 OpenShift
 podman
@@ -13,3 +16,4 @@ pwd
 redhat
 repo
 ssa
+YOLO
