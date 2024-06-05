@@ -1,4 +1,5 @@
 failure-threshold: warning
-ignored:
-  - DL3006
-  - DL3041
+override:
+  info:
+    - DL3006
+    - DL3041

@@ -40,11 +40,14 @@ COPY --chown=0:0 entrypoint.sh /
 # install: cli tools
 ADD tools-x86_64.tgz /
 
+ARG YOLO_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/main/scripts/library/term.sh
+RUN bash -c 'cd /home/user; . <(curl -sL '"${YOLO_URL}"') && term_bashrc /etc/skel/.bashrc'
+
 # setup: user
 RUN \
     # setup $PS1 prompt
-    sed -i '/^export PS1=.*/d' /etc/skel/.bashrc && \
-    echo "export PS1='\W \`git branch --show-current 2>/dev/null | sed -r -e \"s@^(.+)@\(\1\) @\"\`$ '" >> /etc/skel/.bashrc && \
+    sed -i '/^PS1=.*/d' /etc/skel/.bashrc && \
+    echo "PS1='\W \`git branch --show-current 2>/dev/null | sed -r -e \"s@^(.+)@\(\1\) @\"\`$ '" >> /etc/skel/.bashrc && \
     # copy global git configuration to user config
     cp /etc/gitconfig /etc/skel/.gitconfig && \
     useradd -u 1001 \
@@ -58,9 +61,6 @@ RUN \
     chmod +x /entrypoint.sh && \
     chmod g+w /wto/bin && \
     get-tooling-versions.sh > /tmp/installed_tools.txt
-
-ARG YOLO_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/main/scripts/library/term.sh
-RUN bash -c 'cd /home/user; . <(curl -sL '"${YOLO_URL}"') && term_bashrc /etc/skel/.bashrc'
 
 USER 1001
 ENV HOME=/home/user
