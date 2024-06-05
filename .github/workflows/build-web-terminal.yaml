@@ -1,4 +1,4 @@
-name: Build - Web Terminal Container
+name: Build
 
 on:  # yamllint disable-line rule:truthy
   schedule:
@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache@v4
         id: cache-tooling-binaries
         with:
-          path: tools-x86_64.tgz
+          path: container/tools-x86_64.tgz
           key: ${{ hashFiles('container/bin.sh', 'container/download_tools.sh') }}
 
       - name: Download tooling binaries
