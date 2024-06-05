@@ -43,7 +43,7 @@ jobs:
         id: cache-tooling-binaries
         with:
           path: tools-x86_64.tgz
-          key: ${{ hashFiles('bin.sh', 'download_tools.sh') }}
+          key: ${{ hashFiles('container/bin.sh', 'container/download_tools.sh') }}
 
       - name: Download tooling binaries
         if: steps.cache-tooling-binaries.outputs.cache-hit != 'true'
