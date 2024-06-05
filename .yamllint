@@ -15,5 +15,5 @@ rules:
     ignore: .github/workflows/
 
 ignore:
-  - "scratch/*"
-  - "src/*"
+  - "container/scratch/*"
+  - "container/src/*"

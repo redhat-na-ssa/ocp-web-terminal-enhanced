@@ -1,4 +1,4 @@
-name: Build - Web Terminal Container
+name: Build
 
 on:  # yamllint disable-line rule:truthy
   schedule:
@@ -42,12 +42,13 @@ jobs:
         uses: actions/cache@v4
         id: cache-tooling-binaries
         with:
-          path: tools-x86_64.tgz
-          key: ${{ hashFiles('bin.sh', 'download_tools.sh') }}
+          path: container/tools-x86_64.tgz
+          key: ${{ hashFiles('container/bin.sh', 'container/download_tools.sh') }}
 
       - name: Download tooling binaries
         if: steps.cache-tooling-binaries.outputs.cache-hit != 'true'
         run: |
+          cd container
           ./download_tools.sh
 
       - name: Log into GitHub Container Registry
@@ -61,8 +62,8 @@ jobs:
       - name: Build and push images to ghcr.io
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: Containerfile
+          context: container
+          file: container/Containerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ghcr.io/${{ github.repository_owner }}/web-terminal-tooling:git-${{ steps.git-sha.outputs.sha }}
