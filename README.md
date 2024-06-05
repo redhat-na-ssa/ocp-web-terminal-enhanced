@@ -15,6 +15,14 @@ podman build -t web-terminal-tooling:local .
 podman run -it --rm -v $(pwd):/data:z web-terminal-tooling:local /bin/bash
 ```
 
+## Contributions
+
+Please run the following before submitting a PR / commit
+
+```sh
+lint.sh
+```
+
 ## Links
 
 - https://github.com/redhat-developer/web-terminal-operator
