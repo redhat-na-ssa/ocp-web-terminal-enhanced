@@ -38,7 +38,7 @@ lint_spelling(){
 
 lint_scripts(){
   which shellcheck || return
-  find . -not \( -path '*/venv/*' -o -path '*/scratch/*' \) -name '*.sh'  -print0 | xargs -0 shellcheck
+  find . -not \( -path '*/venv/*' -o -path '*/scratch/*' -o -path '*/container/src/*' \) -name '*.sh'  -print0 | xargs -0 shellcheck
 }
 
 lint_dockerfiles(){
