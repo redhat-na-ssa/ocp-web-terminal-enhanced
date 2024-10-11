@@ -21,7 +21,9 @@ RUN dnf repolist && \
       # misc tools
       httpd-tools \
       # developer tools
-      diffutils curl-minimal wget tar git git-lfs procps jq && \
+      diffutils curl-minimal wget tar git git-lfs procps jq \
+      # david wants tree
+      tree && \
     dnf clean all && \
     rm -rf /var/cache/yum/*
 
@@ -40,7 +42,7 @@ COPY --chown=0:0 entrypoint.sh /
 # install: cli tools
 ADD tools-x86_64.tgz /
 
-ARG YOLO_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.06/scripts/library/term.sh
+ARG YOLO_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.07/scripts/library/term.sh
 RUN bash -c 'cd /home/user; . <(curl -sL '"${YOLO_URL}"') && term_bashrc /etc/skel/.bashrc'
 
 # setup: user
