@@ -21,9 +21,7 @@ RUN dnf repolist && \
       # misc tools
       httpd-tools \
       # developer tools
-      diffutils curl-minimal wget tar git git-lfs procps jq \
-      # david wants tree
-      tree && \
+      diffutils curl-minimal wget tar git git-lfs procps jq && \
     dnf clean all && \
     rm -rf /var/cache/yum/*
 
