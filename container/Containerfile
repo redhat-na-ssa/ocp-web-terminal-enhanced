@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1.3-labs
 # https://github.com/redhat-developer/web-terminal-tooling
-ARG IMAGE_NAME=registry.access.redhat.com/ubi9/ubi
+# https://catalog.redhat.com/search?gs&q=ubi9-minimal&searchType=containers
+ARG IMAGE_NAME=registry.access.redhat.com/ubi9/ubi:9.4
 FROM ${IMAGE_NAME}
 
 USER 0
@@ -64,8 +65,8 @@ RUN \
 
 USER 1001
 ENV HOME=/home/user
-
 WORKDIR ${HOME}
+
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD ["sleep", "infinity"]
 

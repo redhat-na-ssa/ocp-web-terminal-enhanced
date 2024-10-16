@@ -16,7 +16,7 @@ bin_check(){
   [ -d "${BASH_COMP}" ] || mkdir -p "${BASH_COMP}"
 
   [ -e "${BIN_PATH}/${name}" ] || download_"${name}"
- 
+
   # which "${name}" && return 0
 
   echo "
@@ -29,6 +29,7 @@ bin_check(){
     oc|odo|virtctl)
       ${name} completion bash > "${BASH_COMP}/${name}.sh"
       ${name} version --client 2>&1
+      [ "$name" == "oc" ] && kubectl completion bash > "${BASH_COMP}/kubectl.sh"
       ;;
     helm|tkn|kn|krew|kustomize|oc-mirror|openshift-install|opm|s2i|subctl|crane)
       ${name} completion bash > "${BASH_COMP}/${name}.sh"
@@ -122,7 +123,7 @@ download_subctl(){
 download_virtctl(){
   BIN_VERSION=1.3.1
   DOWNLOAD_URL=https://github.com/kubevirt/kubevirt/releases/download/v${BIN_VERSION}/virtctl-v${BIN_VERSION}-linux-amd64
-  curl "${DOWNLOAD_URL}" -sL -o "${BIN_PATH}/virtctl" 
+  curl "${DOWNLOAD_URL}" -sL -o "${BIN_PATH}/virtctl"
   chmod +x "${BIN_PATH}/virtctl"
 }
 
