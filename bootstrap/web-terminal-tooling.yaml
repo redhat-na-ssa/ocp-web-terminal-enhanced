@@ -17,7 +17,7 @@ spec:
           - |
             #!/bin/bash
 
-            # see https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.07/scripts/library/term.sh
+            # see https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.08/scripts/library/term.sh
             . /home/user/.bashrc
 
             sleep infinity  # just in case
