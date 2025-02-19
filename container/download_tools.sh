@@ -21,6 +21,8 @@ bin_check helm
 bin_check odo
 bin_check tkn
 bin_check kn
+bin_check kit
+bin_check oras
 
 bin_check subctl
 bin_check virtctl

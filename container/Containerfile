@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.3-labs
 # https://github.com/redhat-developer/web-terminal-tooling
 # https://catalog.redhat.com/search?gs&q=ubi9-minimal&searchType=containers
-ARG IMAGE_NAME=registry.access.redhat.com/ubi9/ubi:9.4
+ARG IMAGE_NAME=registry.access.redhat.com/ubi9/ubi:9.5
 FROM ${IMAGE_NAME}
 
 USER 0
@@ -42,7 +42,7 @@ COPY --chown=0:0 entrypoint.sh /
 ADD tools-x86_64.tgz /
 
 ARG YOLO_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.08/scripts/library/term.sh
-RUN bash -c 'cd /home/user; . <(curl -sL '"${YOLO_URL}"') && term_bashrc /etc/skel/.bashrc'
+RUN bash -c '. <(curl -sL '"${YOLO_URL}"') && term_bashrc /etc/skel/.bashrc'
 
 # setup: user
 RUN \
