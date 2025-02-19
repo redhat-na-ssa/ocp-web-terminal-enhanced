@@ -41,7 +41,7 @@ COPY --chown=0:0 entrypoint.sh /
 # install: cli tools
 ADD tools-x86_64.tgz /
 
-ARG YOLO_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.08/scripts/library/term.sh
+ARG YOLO_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.12/scripts/library/term.sh
 RUN bash -c '. <(curl -sL '"${YOLO_URL}"') && term_bashrc /etc/skel/.bashrc'
 
 # setup: user
