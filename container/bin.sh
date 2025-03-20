@@ -31,7 +31,7 @@ bin_check(){
       ${name} version --client 2>&1
       [ "$name" == "oc" ] && kubectl completion bash > "${BASH_COMP}/kubectl.sh"
       ;;
-    helm|kit|tkn|kn|krew|kustomize|oc-mirror|openshift-install|opm|oras|s2i|subctl|crane)
+    hcp|helm|kit|tkn|kn|krew|kustomize|oc-mirror|openshift-install|opm|oras|s2i|subctl|crane)
       ${name} completion bash > "${BASH_COMP}/${name}.sh"
       ${name} version 2>&1 || ${name} --version
       [ -e .oc-mirror.log ] && rm .oc-mirror.log
@@ -95,6 +95,13 @@ download_opm(){
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
 }
 
+download_hcp(){
+  BIN_VERSION=2.7.3-7
+  # https://developers.redhat.com/content-gateway/rest/browse/pub/mce/clients/hcp-cli/
+  DOWNLOAD_URL=https://developers.redhat.com/content-gateway/file/pub/mce/clients/hcp-cli/${BIN_VERSION}/hcp-cli-${BIN_VERSION}-linux-amd64.tar.gz
+  curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
+}
+
 download_tkn(){
   BIN_VERSION=latest
   DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/pipeline/${BIN_VERSION}/tkn-linux-amd64.tar.gz
@@ -109,7 +116,7 @@ download_kn(){
 }
 
 download_kit(){
-  BIN_VERSION=v1.2.1
+  BIN_VERSION=v1.2.2
   # DOWNLOAD_URL=https://github.com/jozu-ai/kitops/releases/latest/download/kitops-linux-x86_64.tar.gz
   DOWNLOAD_URL=https://github.com/jozu-ai/kitops/releases/download/${BIN_VERSION}/kitops-linux-x86_64.tar.gz
   echo $DOWNLOAD_URL
