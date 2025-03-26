@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: snok/container-retention-policy@v3.0.0
         with:
-          account: user
+          account: redhat-na-ssa
           token: ${{ secrets.GITHUB_TOKEN }}
           image-names: "web-terminal-tooling"  # all packages owned by the account
           tag-selection: untagged
