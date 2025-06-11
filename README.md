@@ -13,6 +13,18 @@ This repo is intended to provide additional tools and a pattern to customize the
 
 Use an [OpenShift Web Terminal](https://docs.openshift.com/container-platform/4.14/web_console/web_terminal/installing-web-terminal.html)
 
+Easy (one command)
+
+```sh
+# apply firmly
+until oc apply -k  https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced/bootstrap; do : ; done
+
+# delete old web terminal
+$(wtoctl | grep 'oc delete')
+```
+
+Alternative (clone repo)
+
 ```sh
 # git clone
 https://github.com/redhat-na-ssa/ocp-web-terminal-enhanced.git
