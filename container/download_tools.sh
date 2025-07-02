@@ -30,6 +30,7 @@ bin_check kustomize
 
 bin_check yq
 bin_check oc-mirror
+bin_check k9s
 bin_check krew
 bin_check kubectl-operator
 bin_check rclone
