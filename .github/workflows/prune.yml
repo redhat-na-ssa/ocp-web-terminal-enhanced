@@ -17,7 +17,5 @@ jobs:
           account: redhat-na-ssa
           token: ${{ secrets.GITHUB_TOKEN }}
           image-names: "web-terminal-tooling"  # all packages owned by the account
-          image-tags: "!git*"
           tag-selection: untagged
           cut-off: 4w
-          keep-n-most-recent: 10
