@@ -8,7 +8,10 @@ BASH_COMP=scratch/etc/bash_completion.d
 
 PATH=${BIN_PATH}:${PATH}
 
-[ -e bin.sh ] || curl -LO https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.18/scripts/library/bin.sh
+SCRIPT_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.18/scripts/library
+
+[ -e bin.sh ] || curl -sLO "${SCRIPT_URL}/bin.sh"
+[ -e term.sh ] || curl -sLO "${SCRIPT_URL}/term.sh"
 
 # shellcheck disable=SC1091
 . bin.sh
