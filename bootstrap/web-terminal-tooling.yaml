@@ -17,7 +17,19 @@ spec:
           - |
             #!/bin/bash
 
-            # see https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.08/scripts/library/term.sh
+            [ -d "$HOME/bin" ] || mkdir "$HOME/bin"
+
+            echo "
+            GIT_REPO=https://github.com/redhat-na-ssa/demo-ocp-template.git
+            GIT_PATH=demo
+
+            [ -e ~/\${GIT_PATH} ] || git clone \${GIT_REPO} ~/\${GIT_PATH}
+            [ -e ~/\${GIT_PATH} ] && cd ~/\${GIT_PATH}
+
+            [ -d \"\${HOME}/bin\" ] && PATH=\${HOME}/bin:\${PATH}
+
+            " >> /home/user/.bashrc
+
             . /home/user/.bashrc
 
             sleep infinity  # just in case
