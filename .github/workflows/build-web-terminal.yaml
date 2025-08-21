@@ -3,19 +3,17 @@ name: Build
 on:  # yamllint disable-line rule:truthy
   workflow_dispatch:
 
-  # schedule:
-  #   - cron: '5 4 * * 6'
+  schedule:
+    - cron: '5 4 * * 6'
 
   push:
     branches: ["main"]
-    # paths:
-    # - components/containers/web-terminal/**
-    # - .github/workflows/**
+    paths:
+    - container/**
   pull_request:
     branches: ["main"]
-    # paths:
-    # - components/containers/web-terminal/**
-    # - .github/workflows/**
+    paths:
+    - container/**
 
 concurrency:
   group: web-terminal-tooling
