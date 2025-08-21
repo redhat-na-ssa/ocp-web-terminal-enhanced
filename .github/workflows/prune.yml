@@ -9,7 +9,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-    name: Delete untagged package versions older than 4 weeks
+    name: Prune Packages
     runs-on: ubuntu-latest
     steps:
       - uses: snok/container-retention-policy@v3.0.0
