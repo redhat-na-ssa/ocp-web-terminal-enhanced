@@ -22,7 +22,7 @@ RUN dnf repolist && \
       # misc tools
       httpd-tools skopeo bind-utils \
       # developer tools
-      diffutils curl-minimal wget tar git git-lfs procps jq && \
+      make diffutils curl-minimal wget tar git git-lfs procps jq && \
     dnf clean all && \
     rm -rf /var/cache/yum/*
 
