@@ -28,6 +28,7 @@ RUN dnf repolist && \
 
 ENV WRAPPER_BINARIES=/wto/bin
 ENV BIN_PATH=/usr/local/bin
+ENV UV_TOOL_BIN_DIR=/home/user/bin
 ENV PATH="${WRAPPER_BINARIES}:${PATH}"
 
 COPY src/etc/initial_config /etc/skel
