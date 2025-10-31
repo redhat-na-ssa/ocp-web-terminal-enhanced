@@ -1,7 +1,8 @@
 #!/bin/bash
 # shellcheck disable=SC2035
 
-OPENSHIFT_CLIENTS_URL=https://mirror.openshift.com/pub/openshift-v4/x86_64/clients
+OPENSHIFT_MIRROR_URL=https://mirror.openshift.com/pub
+OPENSHIFT_CLIENTS_URL=${OPENSHIFT_MIRROR_URL}/openshift-v4/x86_64/clients
 
 bin_check(){
   name=${1:-oc}
@@ -26,15 +27,17 @@ bin_check(){
   "
 
   case ${name} in
-    oc|odo|virtctl)
+    kubectl|oc|odo|virtctl)
       ${name} completion bash > "${BASH_COMP}/${name}.sh"
       ${name} version --client 2>&1
-      [ "$name" == "oc" ] && kubectl completion bash > "${BASH_COMP}/kubectl.sh"
+      if [ "$name" == "oc" ]; then
+          kubectl completion bash > "${BASH_COMP}/kubectl.sh"
+      fi
       ;;
-    hcp|helm|kit|tkn|k9s|kn|krew|kustomize|oc-mirror|openshift-install|opm|oras|s2i|subctl|crane)
+    hcp|helm|kit|tkn|k9s|kn|kustomize|oc-mirror|openshift-install|opm|oras|s2i|subctl|crane|dive)
       ${name} completion bash > "${BASH_COMP}/${name}.sh"
       ${name} version 2>&1 || ${name} --version
-      [ -e .oc-mirror.log ] && rm .oc-mirror.log
+      rm -f .oc-mirror.log
       ;;
     rhoas)
       export RHOAS_TELEMETRY=false
@@ -55,6 +58,10 @@ bin_check(){
       ${name} shell-completion bash > "${BASH_COMP}/${name}.sh"
       ${name} --version
       ;;
+    krew)
+      echo
+      ${name} version
+      ;;
     *)
       echo
       ${name} --version
@@ -68,6 +75,13 @@ download_age(){
   DOWNLOAD_URL=https://github.com/FiloSottile/age/releases/download/v${BIN_VERSION}/age-v${BIN_VERSION}-linux-amd64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar vzx --strip-components=1 -C "${BIN_PATH}/"
   chmod +x "${BIN_PATH}"/age*
+}
+
+download_aws(){
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -sLo "awscliv2.zip"
+  unzip -q awscliv2.zip
+  ./aws/install --bin-dir "${BIN_PATH}" --install-dir "${BIN_PATH}/aws-cli" --update
+  rm -rf awscliv2.zip aws
 }
 
 download_busybox(){
@@ -86,6 +100,13 @@ download_crane(){
   curl "${DOWNLOAD_URL}" -sL | tar vzx -C "${BIN_PATH}/" {crane,gcrane}
 }
 
+download_dive(){
+  BIN_VERSION=0.13.1
+  DOWNLOAD_URL=https://github.com/wagoodman/dive/releases/download/v${BIN_VERSION}/dive_${BIN_VERSION}_linux_amd64.tar.gz
+  curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/" dive
+  chmod +x "${BIN_PATH}/dive"
+}
+
 download_hcp(){
   BIN_VERSION=2.8.2-8
   # https://developers.redhat.com/content-gateway/rest/browse/pub/mce/clients/hcp-cli/
@@ -96,7 +117,14 @@ download_hcp(){
 download_helm(){
   BIN_VERSION=latest
   DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/helm/${BIN_VERSION}/helm-linux-amd64.tar.gz
-  curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}"/ helm-linux-amd64
+  curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/" helm-linux-amd64
+  mv "${BIN_PATH}/helm-linux-amd64" "${BIN_PATH}/helm"
+}
+
+download_helmfile(){
+  BIN_VERSION=1.1.7
+  DOWNLOAD_URL=https://github.com/helmfile/helmfile/releases/download/v${BIN_VERSION}/helmfile_${BIN_VERSION}_linux_amd64.tar.gz
+  curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
   mv "${BIN_PATH}/helm-linux-amd64" "${BIN_PATH}/helm"
 }
 
@@ -104,13 +132,12 @@ download_k9s(){
   BIN_VERSION=v0.50.6
   K9S="k9s_${OS}_${ARCH}"
   DOWNLOAD_URL="https://github.com/derailed/k9s/releases/download/${BIN_VERSION}/${K9S}.tar.gz"
-  curl "${DOWNLOAD_URL}" -sL | tar vzx -C "${BIN_PATH}/"
+  curl "${DOWNLOAD_URL}" -sL | tar vzx -C "${BIN_PATH}/" k9s
   chmod +x "${BIN_PATH}/k9s"
 }
 
 download_kit(){
   DOWNLOAD_URL=https://github.com/jozu-ai/kitops/releases/latest/download/kitops-linux-x86_64.tar.gz
-  echo $DOWNLOAD_URL
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/" kit
   chmod +x "${BIN_PATH}/kit"
 }
@@ -132,6 +159,13 @@ download_krew(){
   krew install krew
 }
 
+download_kubectl(){
+  BIN_VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+  DOWNLOAD_URL=https://storage.googleapis.com/kubernetes-release/release/${BIN_VERSION}/bin/linux/amd64/kubectl
+  curl "${DOWNLOAD_URL}" -sLo "${BIN_PATH}/kubectl"
+  chmod +x "${BIN_PATH}/kubectl"
+}
+
 download_kubectl-operator(){
   BIN_VERSION=0.5.1
   DOWNLOAD_URL=https://github.com/operator-framework/kubectl-operator/releases/download/v${BIN_VERSION}/kubectl-operator_v${BIN_VERSION}_linux_amd64.tar.gz
@@ -143,6 +177,13 @@ download_kustomize(){
   BIN_VERSION=5.7.0
   DOWNLOAD_URL=https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${BIN_VERSION}/kustomize_v${BIN_VERSION}_linux_amd64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/" kustomize
+}
+
+download_mirror-registry(){
+  BIN_VERSION=latest
+  DOWNLOAD_URL=${OPENSHIFT_MIRROR_URL}/cgw/mirror-registry/${BIN_VERSION}/mirror-registry-amd64.tar.gz
+  curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
+  chmod +x "${BIN_PATH}/mirror-registry"
 }
 
 download_oc(){
@@ -164,6 +205,13 @@ download_odo(){
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
 }
 
+download_openshift-install(){
+  BIN_VERSION=4.18.22
+  DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/ocp/${BIN_VERSION}/openshift-install-linux.tar.gz
+  curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/" openshift-install
+  chmod +x "${BIN_PATH}/openshift-install"
+}
+
 download_opm(){
   BIN_VERSION=latest
   DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/ocp/${BIN_VERSION}/opm-linux.tar.gz
@@ -183,7 +231,6 @@ download_rclone(){
   unzip rclone-current-linux-amd64.zip
 
   cp rclone-*-linux-amd64/rclone "${BIN_PATH}/rclone"
-  chgrp root "${BIN_PATH}/rclone"
   chmod +x "${BIN_PATH}/rclone"
 
   rm -rf rclone-*-linux-amd64*
@@ -225,6 +272,12 @@ download_tkn(){
   BIN_VERSION=latest
   DOWNLOAD_URL=${OPENSHIFT_CLIENTS_URL}/pipeline/${BIN_VERSION}/tkn-linux-amd64.tar.gz
   curl "${DOWNLOAD_URL}" -sL | tar zx -C "${BIN_PATH}/"
+}
+
+download_uv(){
+  BIN_VERSION=0.9.6
+  DOWNLOAD_URL=https://github.com/astral-sh/uv/releases/download/${BIN_VERSION}/uv-x86_64-unknown-linux-gnu.tar.gz
+  curl "${DOWNLOAD_URL}" -sL | tar zx --strip-components=1 -C "${BIN_PATH}/"
 }
 
 download_virtctl(){

@@ -13,6 +13,7 @@ PATH=${BIN_PATH}:${PATH}
 SCRIPT_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.20/scripts/library
 
 curl -sLO "${SCRIPT_URL}/bin.sh"
+curl -sLO "${SCRIPT_URL}/term.sh"
 
 # shellcheck disable=SC1091
 . bin.sh
