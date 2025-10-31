@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -xeuo pipefail
+
 BIN_PATH=scratch/usr/local/bin
 BASH_COMP=scratch/etc/bash_completion.d
 
@@ -8,10 +10,9 @@ BASH_COMP=scratch/etc/bash_completion.d
 
 PATH=${BIN_PATH}:${PATH}
 
-SCRIPT_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.18/scripts/library
+SCRIPT_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.20/scripts/library
 
-[ -e bin.sh ] || curl -sLO "${SCRIPT_URL}/bin.sh"
-[ -e term.sh ] || curl -sLO "${SCRIPT_URL}/term.sh"
+curl -sLO "${SCRIPT_URL}/bin.sh"
 
 # shellcheck disable=SC1091
 . bin.sh
@@ -41,6 +42,7 @@ bin_check restic
 bin_check sops
 bin_check age
 bin_check crane
+bin_check uv
 
 chmod 755 "${BIN_PATH}"/*
 
