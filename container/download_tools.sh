@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xeuo pipefail
+set -eo pipefail
 
 BIN_PATH=scratch/usr/local/bin
 BASH_COMP=scratch/etc/bash_completion.d
@@ -10,10 +10,11 @@ BASH_COMP=scratch/etc/bash_completion.d
 
 PATH=${BIN_PATH}:${PATH}
 
-SCRIPT_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/v0.20/scripts/library
+SCRIPT_URL=https://raw.githubusercontent.com/redhat-na-ssa/demo-ai-gitops-catalog/main/scripts/library
 
-curl -sLO "${SCRIPT_URL}/bin.sh"
-curl -sLO "${SCRIPT_URL}/term.sh"
+# download update if file missing
+[ -e bin.sh ] || curl -sLO "${SCRIPT_URL}/bin.sh"
+[ -e term.sh ] ||curl -sLO "${SCRIPT_URL}/term.sh"
 
 # shellcheck disable=SC1091
 . bin.sh
