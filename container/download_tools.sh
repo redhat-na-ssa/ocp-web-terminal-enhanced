@@ -49,4 +49,4 @@ bin_check uv
 chmod 755 "${BIN_PATH}"/*
 
 rm "${BIN_PATH}"/LICENSE
-[ -e .no-tar] || tar -czf tools-x86_64.tgz -C scratch . --owner=0 --group=0
+[ -e .no-tar ] || tar -czf tools-x86_64.tgz -C scratch . --owner=0 --group=0
