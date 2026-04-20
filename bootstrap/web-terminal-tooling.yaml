@@ -19,6 +19,18 @@ spec:
 
             [ -d "$HOME/bin" ] || mkdir "$HOME/bin"
 
+            # install nvm at startup - for nodejs
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+            . "$HOME/.nvm/nvm.sh"
+
+            # install nodejs
+            nvm install --lts
+
+            # make node available in the shell
+            echo "
+            nvm use --lts
+            " >> /home/user/.bashrc
+
             echo "
             GIT_REPO=https://github.com/redhat-na-ssa/demo-ocp-template.git
             GIT_PATH=demo
